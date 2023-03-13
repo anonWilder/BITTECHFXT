@@ -1,0 +1,226 @@
+ {% extends 'crypto/base.html' %}   
+
+  {% load static %}
+   {% load crispy_forms_tags %}
+
+
+
+{% block content %}
+<style type="text/css">
+  .vertical-spin{
+    width: 100%;
+  }
+</style>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper" style="background-color: #000422;">
+    <div class="container-full">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="d-flex align-items-center">
+        <div class="me-auto">
+          <h4 class="page-title"></h4>
+          <div class="d-inline-block align-items-center">
+            <nav>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
+                <li class="breadcrumb-item" aria-current="page"></li>
+                <li class="breadcrumb-item active" aria-current="page"></li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+{% include 'crypto/messages.html' %}
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="row">
+
+
+<br>
+
+      <div class="box-body">
+          <!-- Date dd/mm/yyyy -->
+          <div class="form-group">
+
+            <form action="" method="post">
+              {% csrf_token %}
+          <label class="form-label">SELECT A PACKAGE PLAN AND AMOUNT TO BEGIN WITH:</label>
+          <div class="row">
+            <div class="">
+        
+              <br>
+              <div class="input-group">
+                <!-- <div class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+                </div> -->
+                {{form}}
+            <!-- <input class="vertical-spin form-control" placeholder="Your amount ...." type="text" data-bts-button-down-class="btn btn-secondary" data-bts-button-up-class="btn btn-secondary" value="" name="amount" style="display: block;"> -->
+        
+              </div><br>
+              <!-- /.input group -->
+            </div>
+      
+
+
+
+          <!--   <div class="col-6">
+              <select class="btn-group bootstrap-select btn dropdown-toggle btn-default" name="currency">
+                <option selected disabled="true" class="text">---payment method---</option>
+                <option class="text">Tether (USDT)</option>
+                <option class="text">Bitcoin (BTC)</option>
+                <option class="text">Ethereum (ETH)</option>
+              </select>
+            </div>
+ -->
+
+            <button type="submit" class="btn btn-primary btn-sm w-p100 mb-15">submit</button>
+
+          </div>
+          </form>
+          </div>
+          <!-- /.form group -->
+
+          <!-- /.form group -->
+
+          <!-- /.form group -->
+
+        </div>
+
+
+
+
+      </div>
+
+    </section>
+
+        <!-- Main content -->
+    <section class="content">     
+<div class="row">
+        <div class="col-12">
+          <div class="box">
+          <div class="box-body">
+            <h5 class="text-center">All Your Active Packages and {{count}} Running Investment</h5>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered no-margin">
+                <thead>
+                <tr>
+                   <th class="text-center">#</th>
+                   <th>NAME</th>
+                   <th class="text-end">DAILY ROI</th>
+                   <th class="text-end">USD AMOUNT</th>
+                   <th class="text-end">PACKAGE </th>
+                   <th class="text-end">Created Date/Time</th>
+                </tr>
+                 </thead>
+                 <tbody>
+                  {% for pk in pk %}
+                <tr>
+                   <td class="text-center">{{pk.id}}</td>
+                   <td><a href="#" class="hover-warning">{{pk.user.username}}</a></td>
+                   <!-- <td class="text-end"><img src="{{post.prof.url}}" style="width:20px"></td> -->
+                   <td class="text-end"><span></span> {{pk.roi}}</td>
+               
+                   <td class="text-end"><span>$</span> {{pk.amount}}</td>
+                   <td class="text-end"><span></span> {{pk.membership}} Plan</td>
+                   <td class="text-end"><span></span>{{pk.item_created_dated}}</td>
+                   {% if pk.statuse == 'Active' %}
+                   <td class="text-end"><span class="label"  style="background-color: green;">{{pk.statuse}}</span></td>
+                   {% elif pk.statuse == 'Inactive' %}
+                   <td class="text-end"><span class="label label-danger">{{pk.statuse}}</span></td>
+                   {% else %}
+                   <td class="text-end"><span class="label" style="background-color:#d7961a;">{{pk.statuse}}</span></td>
+                   {% endif %}
+
+                </tr>
+                {% endfor %}
+                 </tbody>
+                
+              </table>
+            </div>
+          </div>
+          <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        </div>
+
+
+
+
+    </section>
+    <!-- /.content -->
+
+
+ <section class="content">     
+<div class="row">
+        <div class="col-12">
+          <div class="box">
+          <div class="box-body">
+            <h5 class="text-center">All Your Inactive Packages and {{count}} Running Investment</h5>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered no-margin">
+                <thead>
+                <tr>
+                   <th class="text-center">#</th>
+                   <th>NAME</th>
+                   <!-- <th class="text-end">DAILY ROI</th> -->
+                   <th class="text-end">USD AMOUNT</th>
+                   <th class="text-end">PACKAGE </th>
+                   <th class="text-end">Created Date/Time</th>
+                   <th class="text-end">INVESTMENT STATUS</th>
+                </tr>
+                 </thead>
+                 <tbody>
+                  {% for pk in pks %}
+                <tr>
+                   <td class="text-center">{{pk.id}}</td>
+                   <td><a href="#" class="hover-warning">{{pk.user.username}}</a></td>
+                   <!-- <td class="text-end"><img src="{{post.prof.url}}" style="width:20px"></td> -->
+                   <!-- <td class="text-end"><span></span> {{pk.roi}}</td> -->
+               
+                   <td class="text-end"><span>$</span> {{pk.amount}}</td>
+                   <td class="text-end"><span></span> {{pk.membership}} Plan</td>
+                   <td class="text-end"><span></span>{{pk.item_created_dated}}</td>
+                   {% if pk.statuse == 'Active' %}
+                   <td class="text-end"><span class="label"  style="background-color: green;">{{pk.statuse}}</span></td>
+                   {% elif pk.statuse == 'Inactive' %}
+                   <td class="text-end"><span class="label label-danger">{{pk.statuse}}</span></td>
+                   {% else %}
+                   <td class="text-end"><span class="label" style="background-color:#d7961a;">{{pk.statuse}}</span></td>
+                   {% endif %}
+                </tr>
+                {% endfor %}
+                 </tbody>
+                
+              </table>
+            </div>
+          </div>
+          <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        </div>
+
+
+
+
+    </section>
+    <!-- /.content -->
+    <!-- /.content -->
+    </div>
+  </div>
+  <!-- /.content-wrapper -->
+  
+  
+
+
+
+  <!-- /.modal -->
+
+{% endblock content %}
+  <!-- Page Content overlay -->
+  
+  
