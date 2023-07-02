@@ -61,9 +61,9 @@ def DashboardView(request):
 	# live_pric = suo.find('div', {'class': 'priceValue'})
 	# return HttpResponse(live_pric)	
 	soup3 = bs4.BeautifulSoup(res3.content, "html.parser")
-	live_price = soup2.find_all('div', {'class': 'priceValue'})
+	live_price = soup2.find_all('span', {'class': 'sc-16891c57-0 dxubiK base-text'})
 	
-	live_price3 = soup3.find_all('div', {'class': 'priceValue'})
+	live_price3 = soup3.find_all('span', {'class': 'sc-16891c57-0 dxubiK base-text'})
 	live_bitcoin_price = live_price[0].getText()
 	
 	live_bitcoin_price1 = live_price[0].getText()
@@ -204,7 +204,7 @@ def transaction(request):
 	# suo = bs4.BeautifulSoup(res2.content, "html.parser")
 	# live_pric = suo.find('div', {'class': 'priceValue'})
 	# return HttpResponse(live_pric)	
-	live_price = soup2.find_all('div', {'class': 'priceValue'})
+	live_price = soup2.find_all('span', {'class': 'sc-16891c57-0 dxubiK base-text'})
 	
 	live_bitcoin_price = live_price[0].getText()
 	
@@ -242,9 +242,10 @@ def transaction(request):
 	# live_pric = suo.find('div', {'class': 'priceValue'})
 	# return HttpResponse(live_pric)	
 	soup3 = bs4.BeautifulSoup(res3.content, "html.parser")
-	live_price = soup2.find_all('div', {'class': 'priceValue'})
+	live_price = soup2.find_all('span', {'class': 'sc-16891c57-0 dxubiK base-text'})
 	
-	live_price3 = soup3.find_all('div', {'class': 'priceValue'})
+	live_price3 = soup3.find_all('span', {'class': 'sc-16891c57-0 dxubiK base-text'})
+	
 	live_bitcoin_price = live_price[0].getText()
 	
 	live_bitcoin_price1 = live_price[0].getText()
@@ -437,7 +438,8 @@ def withdraw(request):
 		# suo = bs4.BeautifulSoup(res2.content, "html.parser")
 		# live_pric = suo.find('div', {'class': 'priceValue'})
 		# return HttpResponse(live_pric)	
-		live_price = soup2.find_all('div', {'class': 'priceValue'})
+		# live_price = soup2.find_all('div', {'class': 'priceValue'})
+		live_price = soup2.find_all('span', {'class': 'sc-16891c57-0 dxubiK base-text'})
 		
 		live_bitcoin_price = live_price[0].getText()
 		
@@ -1275,4 +1277,4 @@ def packdeclinmail(request, id):
 		messages.success(request, 'Mail has been sent Successfully')
 		# return redirect('/withdraw') 
 		return redirect("/adminDT")
-	return render(request, 'crypto/packsend.html', {'employee': employee}) 
+	return render(request, 'crypto/packsend.html', {'employee': employee})
